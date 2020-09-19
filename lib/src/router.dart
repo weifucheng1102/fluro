@@ -41,20 +41,31 @@ class Router {
   void pop(BuildContext context) => Navigator.pop(context);
 
   ///
-  Future navigateTo(BuildContext context, String path,
-      {bool replace = false,
-      bool clearStack = false,
-      TransitionType transition,
-      Duration transitionDuration = const Duration(milliseconds: 250),
-      RouteTransitionsBuilder transitionBuilder}) {
-    RouteMatch routeMatch = matchRoute(context, path,
-        transitionType: transition,
-        transitionsBuilder: transitionBuilder,
-        transitionDuration: transitionDuration);
+  Future navigateTo(
+    BuildContext context,
+    String path, {
+    bool replace = false,
+    bool clearStack = false,
+    TransitionType transition,
+    Duration transitionDuration = const Duration(milliseconds: 250),
+    RouteTransitionsBuilder transitionBuilder,
+    dynamic object,
+  }) {
+    RouteMatch routeMatch = matchRoute(
+      context,
+      path,
+      transitionType: transition,
+      transitionsBuilder: transitionBuilder,
+      transitionDuration: transitionDuration,
+      object: object,
+    );
     Route<dynamic> route = routeMatch.route;
     Completer completer = Completer();
     Future future = completer.future;
     if (routeMatch.matchType == RouteMatchType.nonVisual) {
+      // if (routeMatch.handler.type == HandlerType.future) {
+      //    future = routeMatch.handler.handlerFunc(context, routeMatch.parameters, routeMatch.object);
+      //  }
       completer.complete("Non visual route type.");
     } else {
       if (route == null && notFoundHandler != null) {
@@ -94,11 +105,15 @@ class Router {
   }
 
   ///
-  RouteMatch matchRoute(BuildContext buildContext, String path,
-      {RouteSettings routeSettings,
-      TransitionType transitionType,
-      Duration transitionDuration = const Duration(milliseconds: 250),
-      RouteTransitionsBuilder transitionsBuilder}) {
+  RouteMatch matchRoute(
+    BuildContext buildContext,
+    String path, {
+    RouteSettings routeSettings,
+    TransitionType transitionType,
+    Duration transitionDuration = const Duration(milliseconds: 250),
+    RouteTransitionsBuilder transitionsBuilder,
+    dynamic object,
+  }) {
     RouteSettings settingsToUse = routeSettings;
     if (routeSettings == null) {
       settingsToUse = RouteSettings(name: path);
@@ -113,13 +128,17 @@ class Router {
     if (route == null && notFoundHandler == null) {
       return RouteMatch(
           matchType: RouteMatchType.noMatch,
-          errorMessage: "No matching route was found");
+          errorMessage: "No matching route was found",
+          handler: handler);
     }
     Map<String, List<String>> parameters =
         match?.parameters ?? <String, List<String>>{};
     if (handler.type == HandlerType.function) {
       handler.handlerFunc(buildContext, parameters);
-      return RouteMatch(matchType: RouteMatchType.nonVisual);
+      return RouteMatch(
+        matchType: RouteMatchType.nonVisual,
+        handler: handler,
+      );
     }
 
     RouteCreator creator =
@@ -132,14 +151,14 @@ class Router {
               settings: routeSettings,
               fullscreenDialog: transition == TransitionType.nativeModal,
               builder: (BuildContext context) {
-                return handler.handlerFunc(context, parameters);
+                return handler.handlerFunc(context, parameters, object);
               });
         } else {
           return MaterialPageRoute<dynamic>(
               settings: routeSettings,
               fullscreenDialog: transition == TransitionType.nativeModal,
               builder: (BuildContext context) {
-                return handler.handlerFunc(context, parameters);
+                return handler.handlerFunc(context, parameters, object);
               });
         }
       } else if (transition == TransitionType.material ||
@@ -149,7 +168,7 @@ class Router {
             fullscreenDialog:
                 transition == TransitionType.materialFullScreenDialog,
             builder: (BuildContext context) {
-              return handler.handlerFunc(context, parameters);
+              return handler.handlerFunc(context, parameters, object);
             });
       } else if (transition == TransitionType.cupertino ||
           transition == TransitionType.cupertinoFullScreenDialog) {
@@ -158,7 +177,7 @@ class Router {
             fullscreenDialog:
                 transition == TransitionType.cupertinoFullScreenDialog,
             builder: (BuildContext context) {
-              return handler.handlerFunc(context, parameters);
+              return handler.handlerFunc(context, parameters, object);
             });
       } else {
         var routeTransitionsBuilder;
@@ -171,7 +190,7 @@ class Router {
           settings: routeSettings,
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
-            return handler.handlerFunc(context, parameters);
+            return handler.handlerFunc(context, parameters, object);
           },
           transitionDuration: transitionDuration,
           transitionsBuilder: routeTransitionsBuilder,
@@ -181,6 +200,7 @@ class Router {
     return RouteMatch(
       matchType: RouteMatchType.visual,
       route: creator(settingsToUse, parameters),
+      handler: handler,
     );
   }
 
