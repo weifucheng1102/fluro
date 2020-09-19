@@ -1,10 +1,12 @@
 /*
- * fluro
- * Created by Yakka
- * https://theyakka.com
- * 
- * Copyright (c) 2019 Yakka, LLC. All rights reserved.
- * See LICENSE for distribution and usage details.
+ * @Description: routers
+ * @Author: dmlzj
+ * @Github: https://github.com/dmlzj
+ * @Email: 284832506@qq.com
+ * @Date: 2020-09-19 11:12:14
+ * @LastEditors: dmlzj
+ * @LastEditTime: 2020-09-19 13:35:24
+ * @如果有bug，那肯定不是我的锅，嘤嘤嘤
  */
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class Routes {
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
-        handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+        handlerFunc: (BuildContext context, Map<String, List<String>> params, [dynamic object]) {
       print("ROUTE WAS NOT FOUND !!!");
     });
     router.define(root, handler: rootHandler);

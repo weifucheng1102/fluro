@@ -1,3 +1,13 @@
+<!--
+ * @Description: read me
+ * @Author: dmlzj
+ * @Github: https://github.com/dmlzj
+ * @Email: 284832506@qq.com
+ * @Date: 2020-09-19 11:12:14
+ * @LastEditors: dmlzj
+ * @LastEditTime: 2020-09-19 14:06:20
+ * @如果有bug，那肯定不是我的锅，嘤嘤嘤
+-->
 <img src="https://storage.googleapis.com/product-logos/logo_fluro.png" width="220">
 <br/><br/>
 
@@ -55,8 +65,9 @@ you can access the router in other areas in your application.
 
 After instantiating the router, you will need to define your routes and your route handlers:
 ```dart
-var usersHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  return UsersScreen(params["id"][0]);
+var usersHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params, dynamic object) {
+  Test test = object['test']
+  return UsersScreen(params["id"][0], test);
 });
 
 void defineRoutes(Router router) {

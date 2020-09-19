@@ -12,6 +12,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:router_example/test.dart';
 
 import '../../config/application.dart';
 
@@ -230,9 +231,11 @@ class HomeComponentState extends State<HomeComponent> {
       if (result != null) {
         route = "$route&result=$result";
       }
-
+      Map test = {
+        'test': Test('dmlzj', '222')
+      };
       Application.router
-          .navigateTo(context, route, transition: transitionType)
+          .navigateTo(context, route, transition: transitionType, object: test)
           .then((result) {
         if (key == "pop-result") {
           Application.router.navigateTo(context, "/demo/func?message=$result");
@@ -257,11 +260,17 @@ class HomeComponentState extends State<HomeComponent> {
         "/demo?message=$message&color_hex=$hexCode",
         transition: TransitionType.custom,
         transitionBuilder: transition,
+        object: {
+          'test': Test('dmlzj', '1111')
+        },
         transitionDuration: const Duration(milliseconds: 600),
       );
     } else if (key == "fixed-trans") {
+      Map test = {
+        'test': Test('dmlzj', '222')
+      };
       Application.router.navigateTo(
-          context, "/demo/fixedtrans?message=Hello!&color_hex=#f4424b");
+          context, "/demo/fixedtrans?message=Hello!&color_hex=#f4424b", object: test);
     } else {
       message = "You tapped the function button!";
       Application.router.navigateTo(context, "/demo/func?message=$message");

@@ -1,26 +1,25 @@
 /*
- * fluro
- * Created by Yakka
- * https://theyakka.com
- * 
- * Copyright (c) 2019 Yakka, LLC. All rights reserved.
- * See LICENSE for distribution and usage details.
+ * @Description: demo simple
+ * @Author: dmlzj
+ * @Github: https://github.com/dmlzj
+ * @Email: 284832506@qq.com
+ * @Date: 2020-09-19 11:12:14
+ * @LastEditors: dmlzj
+ * @LastEditTime: 2020-09-19 13:53:00
+ * @如果有bug，那肯定不是我的锅，嘤嘤嘤
  */
+import 'package:router_example/test.dart';
+
 import '../../helpers/color_helpers.dart';
 import 'package:flutter/material.dart';
 
 class DemoSimpleComponent extends StatelessWidget {
-  DemoSimpleComponent(
-      {String message = "Testing",
-      Color color = const Color(0xFFFFFFFF),
-      String result})
-      : this.message = message,
-        this.color = color,
-        this.result = result;
+  DemoSimpleComponent({this.message, this.color, this.result, this.test});
 
   final String message;
   final Color color;
   final String result;
+  final Test test;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +33,8 @@ class DemoSimpleComponent extends StatelessWidget {
             color: ColorHelpers.blackOrWhiteContrastColor(color),
             width: 260.0,
           ),
+          Text(test.name),
+          Text(test.id),
           Padding(
             padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 15.0),
             child: Text(

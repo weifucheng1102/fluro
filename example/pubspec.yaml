@@ -1,6 +1,6 @@
 name: router_example
 description: An example project for the flutter router.
-
+version: 1.0.0
 dependencies:
   flutter:
     sdk: flutter
