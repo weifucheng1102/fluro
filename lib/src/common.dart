@@ -37,10 +37,8 @@ typedef Route<T> RouteCreator<T>(
 ///
 /// Note: you can access [RouteSettings] with the [context.settings] extension
 typedef Widget? HandlerFunc(
-  BuildContext? context,
-  Map<String, List<String>> parameters,
-  [dynamic object]
-);
+    BuildContext? context, Map<String, List<String>> parameters,
+    [dynamic object]);
 
 /// A route that is added to the router tree.
 class AppRoute {

@@ -265,7 +265,8 @@ class FluroRouter {
 
     return RouteMatch(
       matchType: RouteMatchType.visual,
-      route: creator(settingsToUse, parameters), handler: handler,
+      route: creator(settingsToUse, parameters),
+      handler: handler,
     );
   }
 

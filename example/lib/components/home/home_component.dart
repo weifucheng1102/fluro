@@ -219,11 +219,8 @@ class HomeComponentState extends State<HomeComponent> {
       }
       TestData test = TestData('test is ok');
 
-      Application.router
-          .navigateTo(context, route, transition: transitionType, object: {
-            'test': test
-          })
-          .then((result) {
+      Application.router.navigateTo(context, route,
+          transition: transitionType, object: {'test': test}).then((result) {
         if (key == "pop-result") {
           Application.router.navigateTo(context, "/demo/func?message=$result");
         }

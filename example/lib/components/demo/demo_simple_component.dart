@@ -13,13 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
 class DemoSimpleComponent extends StatelessWidget {
-  DemoSimpleComponent(
-      {String message = "Testing",
-      Color color = const Color(0xFFFFFFFF),
-      String? result,
-      TestData? test,
-      })
-      : this.message = message,
+  DemoSimpleComponent({
+    String message = "Testing",
+    Color color = const Color(0xFFFFFFFF),
+    String? result,
+    TestData? test,
+  })  : this.message = message,
         this.color = color,
         this.result = result,
         this.test = test;

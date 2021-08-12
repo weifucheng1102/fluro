@@ -18,8 +18,9 @@ class Routes {
   static String deepLink = "/message";
 
   static void configureRoutes(FluroRouter router) {
-    router.notFoundHandler = Handler(
-        handlerFunc: (BuildContext? context, Map<String, List<String>> params, [dynamic object]) {
+    router.notFoundHandler = Handler(handlerFunc:
+        (BuildContext? context, Map<String, List<String>> params,
+            [dynamic object]) {
       print("ROUTE WAS NOT FOUND !!!");
       return;
     });
