@@ -9,6 +9,7 @@
 import 'dart:async';
 
 import 'package:fluro/fluro.dart';
+import 'package:fluro_example/test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -216,9 +217,12 @@ class HomeComponentState extends State<HomeComponent> {
       if (result != null) {
         route = "$route&result=$result";
       }
+      Test test = Test('test is ok');
 
       Application.router
-          .navigateTo(context, route, transition: transitionType)
+          .navigateTo(context, route, transition: transitionType, object: {
+            'test': test
+          })
           .then((result) {
         if (key == "pop-result") {
           Application.router.navigateTo(context, "/demo/func?message=$result");

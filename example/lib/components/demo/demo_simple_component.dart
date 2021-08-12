@@ -6,6 +6,8 @@
  * Copyright (c) 2019 Yakka, LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+import 'package:fluro_example/test.dart';
+
 import '../../helpers/color_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
@@ -14,14 +16,18 @@ class DemoSimpleComponent extends StatelessWidget {
   DemoSimpleComponent(
       {String message = "Testing",
       Color color = const Color(0xFFFFFFFF),
-      String? result})
+      String? result,
+      Test? test,
+      })
       : this.message = message,
         this.color = color,
-        this.result = result;
+        this.result = result,
+        this.test = test;
 
   final String message;
   final Color color;
   final String? result;
+  final Test? test;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,7 @@ class DemoSimpleComponent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(test?.title ?? 'test没有传过来'),
           Image(
             image: AssetImage("assets/images/acc_boom.png"),
             color: ColorHelpers.blackOrWhiteContrastColor(color),

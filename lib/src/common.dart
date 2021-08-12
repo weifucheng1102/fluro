@@ -39,6 +39,7 @@ typedef Route<T> RouteCreator<T>(
 typedef Widget? HandlerFunc(
   BuildContext? context,
   Map<String, List<String>> parameters,
+  [dynamic object]
 );
 
 /// A route that is added to the router tree.
@@ -90,11 +91,17 @@ class RouteMatch {
     this.matchType = RouteMatchType.noMatch,
     this.route,
     this.errorMessage = "Unable to match route. Please check the logs.",
+    required this.handler,
+    this.parameters,
+    this.object,
   });
 
   final Route<dynamic>? route;
   final RouteMatchType matchType;
   final String errorMessage;
+  final Handler handler;
+  final Map<String, List<String>>? parameters;
+  final dynamic object;
 }
 
 /// When the route is not found.

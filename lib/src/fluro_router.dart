@@ -75,6 +75,7 @@ class FluroRouter {
     Duration? transitionDuration,
     RouteTransitionsBuilder? transitionBuilder,
     RouteSettings? routeSettings,
+    dynamic object,
   }) {
     RouteMatch routeMatch = matchRoute(
       context,
@@ -84,6 +85,7 @@ class FluroRouter {
       transitionDuration: transitionDuration,
       maintainState: maintainState,
       routeSettings: routeSettings,
+      object: object,
     );
 
     Route<dynamic>? route = routeMatch.route;
@@ -148,6 +150,7 @@ class FluroRouter {
     Duration? transitionDuration,
     RouteTransitionsBuilder? transitionsBuilder,
     bool maintainState = true,
+    dynamic object,
   }) {
     RouteSettings settingsToUse = routeSettings ?? RouteSettings(name: path);
 
@@ -173,14 +176,15 @@ class FluroRouter {
       return RouteMatch(
         matchType: RouteMatchType.noMatch,
         errorMessage: "No matching route was found",
+        handler: handler,
       );
     }
 
     final parameters = match?.parameters ?? <String, List<String>>{};
 
     if (handler.type == HandlerType.function) {
-      handler.handlerFunc(buildContext, parameters);
-      return RouteMatch(matchType: RouteMatchType.nonVisual);
+      handler.handlerFunc(buildContext, parameters, object);
+      return RouteMatch(matchType: RouteMatchType.nonVisual, handler: handler);
     }
 
     RouteCreator creator = (
@@ -196,7 +200,7 @@ class FluroRouter {
           fullscreenDialog: transition == TransitionType.nativeModal,
           maintainState: maintainState,
           builder: (BuildContext context) {
-            return handler.handlerFunc(context, parameters) ??
+            return handler.handlerFunc(context, parameters, object) ??
                 SizedBox.shrink();
           },
         );
@@ -208,7 +212,7 @@ class FluroRouter {
               transition == TransitionType.materialFullScreenDialog,
           maintainState: maintainState,
           builder: (BuildContext context) {
-            return handler.handlerFunc(context, parameters) ??
+            return handler.handlerFunc(context, parameters, object) ??
                 SizedBox.shrink();
           },
         );
@@ -220,7 +224,7 @@ class FluroRouter {
               transition == TransitionType.cupertinoFullScreenDialog,
           maintainState: maintainState,
           builder: (BuildContext context) {
-            return handler.handlerFunc(context, parameters) ??
+            return handler.handlerFunc(context, parameters, object) ??
                 SizedBox.shrink();
           },
         );
@@ -239,7 +243,7 @@ class FluroRouter {
           maintainState: maintainState,
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
-            return handler.handlerFunc(context, parameters) ??
+            return handler.handlerFunc(context, parameters, object) ??
                 SizedBox.shrink();
           },
           transitionDuration: transition == TransitionType.none
@@ -261,7 +265,7 @@ class FluroRouter {
 
     return RouteMatch(
       matchType: RouteMatchType.visual,
-      route: creator(settingsToUse, parameters),
+      route: creator(settingsToUse, parameters), handler: handler,
     );
   }
 
