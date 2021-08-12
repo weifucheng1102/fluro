@@ -6,7 +6,7 @@
  * Copyright (c) 2019 Yakka, LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
-import 'package:fluro_example/test.dart';
+import 'package:fluro_example/test_data.dart';
 
 import '../../helpers/color_helpers.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class DemoSimpleComponent extends StatelessWidget {
       {String message = "Testing",
       Color color = const Color(0xFFFFFFFF),
       String? result,
-      Test? test,
+      TestData? test,
       })
       : this.message = message,
         this.color = color,
@@ -27,7 +27,7 @@ class DemoSimpleComponent extends StatelessWidget {
   final String message;
   final Color color;
   final String? result;
-  final Test? test;
+  final TestData? test;
 
   @override
   Widget build(BuildContext context) {

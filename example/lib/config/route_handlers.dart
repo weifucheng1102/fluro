@@ -6,7 +6,7 @@
  * Copyright (c) 2019 Yakka, LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
-import 'package:fluro_example/test.dart';
+import 'package:fluro_example/test_data.dart';
 
 import '../helpers/color_helpers.dart';
 import '../components/demo/demo_simple_component.dart';
@@ -26,7 +26,7 @@ var demoRouteHandler = Handler(
   String? colorHex = params["color_hex"]?.first;
   String? result = params["result"]?.first;
   Color color = Color(0xFFFFFFFF);
-  Test? test = object != null ? object['test'] : null;
+  TestData? test = object != null ? object['test'] : null;
   if (colorHex != null && colorHex.length > 0) {
     color = Color(ColorHelpers.fromHexString(colorHex));
   }

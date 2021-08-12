@@ -9,7 +9,7 @@
 import 'dart:async';
 
 import 'package:fluro/fluro.dart';
-import 'package:fluro_example/test.dart';
+import 'package:fluro_example/test_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -217,7 +217,7 @@ class HomeComponentState extends State<HomeComponent> {
       if (result != null) {
         route = "$route&result=$result";
       }
-      Test test = Test('test is ok');
+      TestData test = TestData('test is ok');
 
       Application.router
           .navigateTo(context, route, transition: transitionType, object: {
