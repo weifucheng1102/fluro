@@ -6,7 +6,7 @@
  * Copyright (c) 2021 Luke Pighetti. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
-library fluro;
+library fluro_dmlzj;
 
 export 'src/common.dart';
 export 'src/extensions.dart';

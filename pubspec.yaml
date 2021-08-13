@@ -1,10 +1,10 @@
-name: fluro
-description: Fluro is a null-safe Flutter routing library that adds flexible routing options like wildcards, named parameters and clear route definitions.
+name: fluro_dmlzj
+description: Dmlzj Fluro is a fork of the popular fluro router for Flutter that adds the option for typed routes\n
 version: 2.0.3
-homepage: https://github.com/lukepighetti/fluro
+homepage: https://github.com/dmlzj/fluro
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.13.4 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:

@@ -6,11 +6,11 @@
  * Copyright (c) 2019 Yakka, LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+import 'package:fluro_dmlzj/fluro_dmlzj.dart';
 import 'package:fluro_example/test_data.dart';
 
 import '../../helpers/color_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
 
 class DemoSimpleComponent extends StatelessWidget {
   DemoSimpleComponent({

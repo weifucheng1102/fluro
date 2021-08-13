@@ -6,7 +6,7 @@
 The brightest, hippest, coolest router for Flutter.
 
 [![Version](https://img.shields.io/github/v/release/lukepighetti/fluro?label=version)](https://pub.dev/packages/fluro)
-[![Build Status](https://github.com/lukepighetti/fluro/workflows/build/badge.svg)](https://github.com/lukepighetti/fluro/actions)
+[![Build Status](https://github.com/lukepighetti/fluro/workflows/build/badge.svg)](https://github.com/dmlzj/fluro/actions)
 
 ## Features
 
@@ -70,26 +70,37 @@ router.navigateTo(context, "/users/1234", transition: TransitionType.fadeIn);
 
 ## Class arguments
 
-Don't want to use strings for params? No worries.
+Don't want to use strings for params? No worries, I add a param object, you can use it.
 
-After pushing a route with a custom `RouteSettings` you can use the `BuildContext.settings` extension to extract the settings. Typically this would be done in `Handler.handlerFunc` so you can pass `RouteSettings.arguments` to your screen widgets.
 
 ```dart
 /// Push a route with custom RouteSettings if you don't want to use path params
-FluroRouter.appRouter.navigateTo(
-  context,
-  'home',
-  routeSettings: RouteSettings(
-    arguments: MyArgumentsDataClass('foo!'),
-  ),
-);
+TestData test = TestData('test is ok');
 
-/// Extract the arguments using [BuildContext.settings.arguments] or [BuildContext.arguments] for short
-var homeHandler = Handler(
-  handlerFunc: (context, params) {
-    final args = context.settings.arguments as MyArgumentsDataClass;
+FluroRouter.appRouter.navigateTo(context, route,
+    transition: transitionType, object: {'test': test}).then((result) {
+  if (key == "pop-result") {
+    Application.router.navigateTo(context, "/demo/func?message=$result");
+  }
+});
 
-    return HomeComponent(args);
-  },
-);
+/// config handler
+var demoRouteHandler = Handler(handlerFunc:
+    (BuildContext? context, Map<String, List<String>> params,
+        [dynamic object]) {
+  String? message = params["message"]?.first;
+  String? colorHex = params["color_hex"]?.first;
+  String? result = params["result"]?.first;
+  Color color = Color(0xFFFFFFFF);
+  TestData? test = object != null ? object['test'] : null;
+  if (colorHex != null && colorHex.length > 0) {
+    color = Color(ColorHelpers.fromHexString(colorHex));
+  }
+  return DemoSimpleComponent(
+    message: message ?? 'Testing',
+    color: color,
+    result: result,
+    test: test,
+  );
+});
 ```

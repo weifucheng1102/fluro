@@ -7,8 +7,8 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:fluro_dmlzj/fluro_dmlzj.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluro/fluro.dart';
 
 void main() {
   test("FluroRouter correctly parses named parameters", () async {

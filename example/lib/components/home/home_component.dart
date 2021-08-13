@@ -8,7 +8,7 @@
  */
 import 'dart:async';
 
-import 'package:fluro/fluro.dart';
+import 'package:fluro_dmlzj/fluro_dmlzj.dart';
 import 'package:fluro_example/test_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
