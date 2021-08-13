@@ -1,3 +1,7 @@
+# 2.0.4
+
+- add object to param
+
 # 2.0.3
 
 - null-safety

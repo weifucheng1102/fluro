@@ -77,7 +77,7 @@ Don't want to use strings for params? No worries, I add a param object, you can 
 /// Push a route with custom RouteSettings if you don't want to use path params
 TestData test = TestData('test is ok');
 
-FluroRouter.appRouter.navigateTo(context, route,
+ Application.router.navigateTo(context, route,
     transition: transitionType, object: {'test': test}).then((result) {
   if (key == "pop-result") {
     Application.router.navigateTo(context, "/demo/func?message=$result");
